@@ -10,36 +10,35 @@
 
 @interface TicTacToe : NSObject
 
--(void) setGameLevel: (NSNumber  *)gameLevel;
--(NSNumber *)gameLevel;
+-(void) setGameLevel: (int  *)gameLevel;
+-(int *)gameLevel;
 
--(void) setUserMode: (NSNumber  *)userMode;
--(NSNumber *)userMode;
-
+-(void) setUserMode: (int  *)userMode;
+-(int *)userMode;
 @end
 
 
 @implementation TicTacToe
 
-    NSNumber *_gameLevel;
-    NSNumber *_userMode;
+    int *_gameLevel;
+    int *_userMode;
 
 
--(void) setGameLevel:(NSNumber *)gameLevel{
+-(void) setGameLevel:(int *)gameLevel{
     _gameLevel = gameLevel;
 }
 
 
--(NSNumber *) gameLevel {
+-(int *) gameLevel {
     return _gameLevel;
 }
 
 
--(void) setUserMode: (NSNumber *)userMode{
+-(void) setUserMode: (int *)userMode{
     _userMode = userMode;
 }
     
--(NSNumber *) userMode {
+-(int *) userMode {
     return _userMode;
 }
 
@@ -47,9 +46,40 @@
 @end
 
 
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
+        
+        
+        int *userSkill = 0;
+        int *playerMode = 0;
+            NSLog(@"Choose skill level \n 1 = have fun \n 2 = go hard \n 3 = Terror Dome ");
+            scanf("%i", userSkill);
+            fpurge(stdin);
+        
+        NSLog(@"Choose playerMode [1 or 2 player ");
+        scanf("%i", playerMode);
+        fpurge(stdin);
+
+
+        
+        TicTacToe *runGame = [[TicTacToe alloc] init];
+        [runGame setGameLevel:(userSkill,playerMode)];
+        
+
+        
+        
+        
+//        NSLog(@"Homework, redone");
+//        
+//        Person *carl = [[Person alloc] init];
+//        Person *mike = [[Person alloc] init];
+//        
+//        [carl setName:@"Carl"];
+//        
+//        [carl setCity:@"Okinawa"];
+//        [mike setCity:@"New York"];
         
         
         //display grid numbers for users and instructions
@@ -73,17 +103,16 @@ int main(int argc, const char * argv[]) {
         
         
         //declare variable for use holding x and o
-        char  oXchoice[2];
+         char  oXchoice[2];
         NSString * ns_oXchoice ;
-        
-        
+                
         
          /*-------------------------------------------start data parse ------------------------------------------------*/
 
     
 //            
 //
-            while (true) {
+             while (true) {
 
                 NSLog(@"Choose x or o: ");
                 scanf("%s", oXchoice);
@@ -102,8 +131,7 @@ int main(int argc, const char * argv[]) {
                     NSLog (@"Wrong choice! ");
                     continue;
                 } //end nsConversion filter check
-                
-                
+                                
             
             /*--------------------------------------------------------------------------------------------------------------------------------------*/
                         
