@@ -4,7 +4,7 @@
 //
 //  Created by Michael Kavouras on 6/25/15.
 //  Copyright (c) 2015 Mike Kavouras. All rights reserved.
-//
+
 #import <Foundation/Foundation.h>
 
 
@@ -52,67 +52,77 @@ int main(int argc, const char * argv[]) {
         
         
         
-        
+        //display grid numbers for users and instructions
+        NSLog (@" 1 | 2 | 3");
+        NSLog (@"-----------");
+        NSLog (@" 4 | 5 | 6");
+        NSLog (@"-----------");
+        NSLog (@" 7 | 8 | 9");
+        NSLog (@"\n");
         
         
         //create and initialize mutableArray
+        //FUNCTION create the array
         NSMutableArray *boxes = [NSMutableArray arrayWithCapacity:9];
         
         
-       
-        NSString *ns_oXchoice ;
+        //declare variable for use holding x and o
+        char  oXchoice[2];
+        NSString * ns_oXchoice ;
         
-        while (true) {
-             char *oXchoice;
-            NSLog(@"Choose x or o: ");
-            scanf("%s", oXchoice);
-            fpurge(stdin);
+        
+        
+        
+         /*-------------------------------------------start data parse ------------------------------------------------*/
+
+    
+//            
+//
+            while (true) {
+
+                NSLog(@"Choose x or o: ");
+                scanf("%s", oXchoice);
+                fpurge(stdin);
+
+                // convert userOption to nsstring
+                ns_oXchoice= [NSString stringWithCString: oXchoice encoding: NSASCIIStringEncoding];
+
+
+                //check nsConversion for good input x/o, regject everything else
+                if ([ns_oXchoice length] == 1 && ([ns_oXchoice isEqualToString:@"x"] || [ns_oXchoice isEqualToString:@"o"])) {
+                    NSLog(@"This is your choice: %@",ns_oXchoice);
+                    //break;
+                }
+                else  {
+                    NSLog (@"Wrong choice! ");
+                    continue;
+                } //end nsConversion filter check
+                
+                
             
-            
-            // convert userOption to nsstring
-            ns_oXchoice = [NSString stringWithCString: oXchoice encoding: NSASCIIStringEncoding];
-            
+            /*--------------------------------------------------------------------------------------------------------------------------------------*/
+                        
+
 
             
-            
-            //check nsConversion for good input x/o, regject everything else
-            if ([ns_oXchoice length] == 1 && ([ns_oXchoice isEqualToString:@"x"] || [ns_oXchoice isEqualToString:@"o"])) {
-                NSLog(@"This is your choice: %@",ns_oXchoice);
-                break;
-            }
-            else  {
-                NSLog (@"Wrong choice! ");
-                continue;
-            } //end ns_oXchoice filter check
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        for (int i=0; i<9; i++) {
+         
+       for (int i=0; i<9; i++) {
             boxes[i] = @" ";
         }
-        
-        //get a number a number from user [1-9]
+//
+//get a number a number from user [1-9]
         int number;
-        
-        //create grid size; (9 = 3x3 grid)
-        for (int i =0; i<9; i++){
-            
-            
-            //run game until all boxes are filled up
-            while ([boxes[i] isEqualTo:@" "]) {
-                printf ("Enter a number ");
-                scanf("%d", &number);
+     /*-------------------------------------------------------Run the Game With 3x3 Grid size is coded into for loop-------------------------------------*/
+       
                 
+                
+       for (int i =0; i<9; i++){
+       
+           //run game until all boxes are filled up
+            while ([boxes[i] isEqualTo:@" "]) {
+                NSLog(@"Enter a number ");
+                scanf("%d", &number);
+                fpurge(stdin);
                 
                 //check for empty boxes before entering user selected options
                 if ([boxes[number-1] isNotEqualTo:@" "]){
@@ -134,50 +144,66 @@ int main(int argc, const char * argv[]) {
                 NSLog (@"\n\n\n\n");
                 
                 
+                //x's and o's are transposed but still work in game
                 if ([ns_oXchoice isEqualToString:@"x"])
                     ns_oXchoice = @"o";
                 else
                     (ns_oXchoice = @"x");
                 
-            }
+                int boxesChecked = 0;
+                int gridSize;
+                int resetCounter = 0;
+                int userLevel = 2;
+                gridSize = (sizeof(boxes));
+                while (boxesChecked < gridSize){
+                    int xCount = 0;
+                    int oCount =0;
+                    for(int i=0; i<(gridSize/userLevel); i++){
+                        if ([boxes[] isEqualToString:@"x"]){
+                            xCount = xCount+1;
+                        } else if ([boxes[i] isEqualToString:@"o"]){
+                            oCount = oCount+1;
+                        }
+                        
+
+                    }//end for loop
+                    
+                    
+                    NSLog(@"%d xCount ",xCount);
+                    NSLog(@"%d oCount ",oCount);
+                    boxesChecked = boxesChecked + 1;
+                    NSLog(@"%d boxesChecked\n\n\n",boxesChecked);
+                }//end while loop
+                
+                    
+                
+            
+             }
             
             
-        }//end of for LOOP
-            
-        //display grid numbers for users and instructions
-        NSLog (@" 1 | 2 | 3");
-        NSLog (@"-----------");
-        NSLog (@" 4 | 5 | 6");
-        NSLog (@"-----------");
-        NSLog (@" 7 | 8 | 9");
-        NSLog (@"\n");
-        
-        
-        //filter user input; run loop until required data is entered
-        
+        }
+                
+       
         } // end of while
-        
-        
-        TicTacToe *user1 = [[TicTacToe alloc] init];
-        
-       [user1 setGameLevel:ns_oXchoice];
-    
-    }
+     }
+
+   // }
+
     return 0;
 }
 
 
 
-//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //8:30
+
 //
-////
-////  main.m
-////  TicTacToe
-////
-////  Created by Michael Kavouras on 6/25/15.
-////  Copyright (c) 2015 Mike Kavouras. All rights reserved.
-////
+//  main.m
+//  TicTacToe
+//
+//  Created by Michael Kavouras on 6/25/15.
+//  Copyright (c) 2015 Mike Kavouras. All rights reserved.
+//
 //#import <Foundation/Foundation.h>
 //
 //
@@ -186,15 +212,15 @@ int main(int argc, const char * argv[]) {
 //-(void) setName: (NSString *)name;
 //-(NSString *)name;
 //
-//-(void) setOxChoice: (NSString *)oxChoice;
-//-(NSString *)oxChoice;
+//-(void) setUserMode: (NSString *)userMode;
+//-(NSString *)userMode;
 //
 //@end
 //
 //
 //@implementation TicTacToe
 //NSString *_name;
-//NSString *_oxChoice;
+//NSString *_userMode;
 //
 //-(void) setName: (NSString *)name{
 //    _name = name;
@@ -205,9 +231,10 @@ int main(int argc, const char * argv[]) {
 //}
 //
 //
-//-(void) setOxChoice: (NSString *)oxChoice{
-//    _oxChoice = oxChoice;
-//    
+//-(void) setUserMode: (NSString *)userMode{
+//    _userMode = userMode;
+//
+//
 //    //create and initialize mutableArray
 //    NSMutableArray *boxes = [NSMutableArray arrayWithCapacity:9];
 //    for (int i=0; i<9; i++) {
@@ -216,7 +243,8 @@ int main(int argc, const char * argv[]) {
 //    
 //    //get a number a number from user [1-9]
 //    int number;
-//    
+//    char * userOption;
+//    NSString *oxChoice;
 //    //create grid size; (9 = 3x3 grid)
 //    for (int i =0; i<9; i++){
 //        
@@ -363,8 +391,9 @@ int main(int argc, const char * argv[]) {
 //        NSLog (@" 7 | 8 | 9");
 //        NSLog (@"\n");
 //        
-//        
 //        char * userOption;
+//        NSString *oxChoice;
+//        
 //        
 //        while (true) {
 //            
@@ -391,7 +420,7 @@ int main(int argc, const char * argv[]) {
 //        
 //        TicTacToe *user1 = [[TicTacToe alloc] init];
 //        
-//        [user1 setOxChoice:nsConversion];
+//        [user1 setUserMode:nsConversion];
 //        
 //    }
 //    return 0;
