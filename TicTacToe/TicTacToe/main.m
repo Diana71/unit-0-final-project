@@ -63,13 +63,18 @@ int main(int argc, const char * argv[]) {
         
         //create and initialize mutableArray
         //FUNCTION create the array
-        NSMutableArray *boxes = [NSMutableArray arrayWithCapacity:9];
+        int gridSize;
+        //let this value come from gameLevel [ easy =9 [3x3 grid] / harder = 16 [4x4 grid] / hardest 25 [5x5 grid]
+        gridSize = 9;
+        
+        NSMutableArray *boxes = [NSMutableArray arrayWithCapacity:gridSize];
+        
+        
         
         
         //declare variable for use holding x and o
         char  oXchoice[2];
         NSString * ns_oXchoice ;
-        
         
         
         
@@ -106,17 +111,16 @@ int main(int argc, const char * argv[]) {
 
             
          
-       for (int i=0; i<9; i++) {
+       for (int i=0; i<gridSize; i++) {
             boxes[i] = @" ";
         }
 //
-//get a number a number from user [1-9]
+//get a number a number from user [1-9] to choose a single grid box
         int number;
      /*-------------------------------------------------------Run the Game With 3x3 Grid size is coded into for loop-------------------------------------*/
        
-                
-                
-       for (int i =0; i<9; i++){
+        
+       for (int i =0; i<gridSize; i++){
        
            //run game until all boxes are filled up
             while ([boxes[i] isEqualTo:@" "]) {
@@ -133,48 +137,70 @@ int main(int argc, const char * argv[]) {
                 
                 //if box is empty enter user selection
                 else if ([boxes[adjInputForOffset] isEqualTo:@" "]){
-                    boxes[number-1] = ns_oXchoice;
+                    boxes[adjInputForOffset] = ns_oXchoice;
                 }
                 
-                //working grid for playing the game
-                NSLog (@" %@ | %@ | %@ ", boxes[0],boxes[1],boxes[2]);
-                NSLog (@"-----------");
-                NSLog (@" %@ | %@ | %@ ", boxes[3],boxes[4],boxes[5]);
-                NSLog (@"-----------");
-                NSLog (@" %@ | %@ | %@ ", boxes[6],boxes[7],boxes[8]);
-                NSLog (@"\n\n\n\n");
-                
-                
                 //x's and o's are transposed but still work in game
-                if ([ns_oXchoice isEqualToString:@"x"])
+                if ([ns_oXchoice isEqualToString:@"x"]){
                     ns_oXchoice = @"o";
-                else
-                    (ns_oXchoice = @"x");
+                }
+                else {
+                    ns_oXchoice = @"x";
+                
+                }
+                
+
+                
+                //working grid for playing the game
+                for (int i =0; i<gridSize/3; i++){
+                NSLog (@"\t%@",boxes[i]);
+                NSLog (@"\t\t%@",boxes[i]);
+                NSLog (@"\t\t\t\t%@",boxes[i]);
+                NSLog (@" ----|-----|-----");
+                 NSLog (@"\n");
+              
+                };
+                
+               
                 
                 int boxesChecked = 0;
-                int gridSize;
+              
                 int resetCounter = 0;
                 int userLevel = 2;
-                gridSize = (sizeof(boxes));
-                while (boxesChecked < gridSize){
-                    int xCount = 0;
-                    int oCount =0;
-                    for(int i=0; i<(gridSize); i++){
-                        if ([boxes[adjInputForOffset] isEqualToString:@"x"]){
-                            xCount = xCount+1;
-                        } else if ([boxes[adjInputForOffset] isEqualToString:@"o"]){
-                            oCount = oCount+1;
-                        }
-                        
-
-                    }//end for loop
-                    
-                    
-                    NSLog(@"%d xCount ",gridSize/xCount);
-                    NSLog(@"%d oCount ",gridSize/oCount);
-                    boxesChecked = boxesChecked + 1;
-                    NSLog(@"%d boxesChecked\n\n\n",boxesChecked);
-                }//end while loop
+                
+                
+                
+                
+                
+              
+                
+                
+//                while (boxesChecked < gridSize){
+//                    int xCount = 0;
+//                    int oCount =0;
+//                    int oTotalCount;
+//                    int xTotalCount;
+//
+//                  
+//                    
+//                    for(int i=0; i<(gridSize); i++){
+//                        if ([boxes[adjInputForOffset] isEqualToString:@"x"]){
+//                            xCount = xCount+1;
+//                        } else if ([boxes[adjInputForOffset] isEqualToString:@"o"]){
+//                            oCount = oCount+1;
+//                        }
+//                        oTotalCount = oCount/gridSize;
+//                        xTotalCount = xCount/gridSize;
+//                        
+//
+//                    }//end for loop
+//                   
+//                    
+//                    NSLog(@"%d xTotalCount ",xTotalCount);
+//                    NSLog(@"%d oTotalCount ",oTotalCount);
+//                    boxesChecked = boxesChecked + 1;
+//                    NSLog(@"%d boxesChecked\n\n\n",boxesChecked);
+//                }//end while loop
                 
                     
                 
