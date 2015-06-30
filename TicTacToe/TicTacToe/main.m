@@ -123,15 +123,16 @@ int main(int argc, const char * argv[]) {
                 NSLog(@"Enter a number ");
                 scanf("%d", &number);
                 fpurge(stdin);
-                
+                int adjInputForOffset;
+                adjInputForOffset = number-1;
                 //check for empty boxes before entering user selected options
-                if ([boxes[number-1] isNotEqualTo:@" "]){
+                if ([boxes[adjInputForOffset] isNotEqualTo:@" "]){
                     NSLog(@"please choose another box");
                 }
                 
                 
                 //if box is empty enter user selection
-                else if ([boxes[number-1] isEqualTo:@" "]){
+                else if ([boxes[adjInputForOffset] isEqualTo:@" "]){
                     boxes[number-1] = ns_oXchoice;
                 }
                 
@@ -158,10 +159,10 @@ int main(int argc, const char * argv[]) {
                 while (boxesChecked < gridSize){
                     int xCount = 0;
                     int oCount =0;
-                    for(int i=0; i<(gridSize/userLevel); i++){
-                        if ([boxes[] isEqualToString:@"x"]){
+                    for(int i=0; i<(gridSize); i++){
+                        if ([boxes[adjInputForOffset] isEqualToString:@"x"]){
                             xCount = xCount+1;
-                        } else if ([boxes[i] isEqualToString:@"o"]){
+                        } else if ([boxes[adjInputForOffset] isEqualToString:@"o"]){
                             oCount = oCount+1;
                         }
                         
@@ -169,8 +170,8 @@ int main(int argc, const char * argv[]) {
                     }//end for loop
                     
                     
-                    NSLog(@"%d xCount ",xCount);
-                    NSLog(@"%d oCount ",oCount);
+                    NSLog(@"%d xCount ",gridSize/xCount);
+                    NSLog(@"%d oCount ",gridSize/oCount);
                     boxesChecked = boxesChecked + 1;
                     NSLog(@"%d boxesChecked\n\n\n",boxesChecked);
                 }//end while loop
